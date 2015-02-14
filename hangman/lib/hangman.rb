@@ -6,9 +6,7 @@
 
 #there is prob a way to load the list everytime, but i'm not sure its necessary
 
-
-def new_game
-  #load dictionary, pick a random word that is 5-12 characters long
+def get_a_word # i need to clean this up
   dictionary = File.readlines("../words.txt")
   word = dictionary.sample
   word = word[0..-2] #remove new line character
@@ -19,13 +17,52 @@ def new_game
     word = word[0..-2]
   end
   word
-
-  # until word.length.betweeen?(5,12) do
-  #   word = dictionary.sample
-  # end
-  # p word
-  #don't forget to strip new line chars
 end
 
-p new_game
+def player_view_word(secret_word)
+  view_word = ""
+  secret_word.length.times do
+    view_word << " _ "
+  end
+  view_word
+end
+
+def new_game
+  #run until solved condition is true
+  #run until count = 0 you loose
+  secret_word = get_a_word
+  count = 5
+  letters_guessed = []
+  p "Welcome to hangman!"
+
+#untill  guess count is 0 or solved = true
+
+
+  p "you have: #{count} guesses left"
+  p "what is your guess?"
+  guess = gets.chomp
+  p "You guessed: #{guess}"
+  letters_guessed << guess
+
+  if secret_word.include?(guess)
+    p "that letter is included in the word (the answer is: #{secret_word})"
+  else
+    count -= 1
+    p "try again! (the answer is: #{secret_word}"
+    p "Here is your work so far: #{player_view_word(secret_word)}"
+  end
+  p "you have guessed these letters: #{letters_guessed}"
+  p "Here is your work so far: #{player_view_word(secret_word)}"
+
+#i need to have a string that only includes blank spaces
+
+  #if the word gue
+  #the guess string has as many '_' characters as there are words in the secret word
+  #i can build a method that just prints the player_view_word
+
+end
+
+
+
+new_game
 
