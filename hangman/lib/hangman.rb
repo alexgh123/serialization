@@ -4,8 +4,11 @@
 
 #so how do i use a url
 
-words = []
+#there is prob a way to load the list everytime, but i'm not sure its necessary
 
-words = File.open("http://scrapmaker.com/data/wordlists/twelve-dicts/5desk.txt")
 
-p words
+
+
+dictionary = File.readlines("../words.txt")
+
+dictionary
