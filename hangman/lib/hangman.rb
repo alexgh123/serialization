@@ -82,6 +82,7 @@ end #ends new game meth
 
 
 #i need to rename the blank_space_show variable becuase it makes no sense, what it is is the obscured player view word, its just blank spaces, but the
+#player_progress is a better variable name?
 
 
 new_game_controller
