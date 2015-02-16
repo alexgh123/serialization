@@ -1,10 +1,3 @@
-# http://scrapmaker.com/data/wordlists/twelve-dicts/5desk.txt
-
-#so here above is link to data, i think i want this file to read it and download it as a file, even though its a one time thing, the other alternative is to just copy and paste and then be on with it
-
-#so how do i use a url
-
-#there is prob a way to load the list everytime, but i'm not sure its necessary
 
 def get_a_word #this isn't necessarily right, i think it can return a word that isn't 5 to 12
   dictionary = File.readlines("../words.txt")
@@ -29,11 +22,15 @@ def solved?(secret_word, players_board)
   secret_word == players_board
 end
 
-def letter_replacer(array_of_correct_indexes, string_of_blank_spaces, guess)
+def letter_replacer(array_of_correct_indexes, string_of_blank_spaces, guess) #3 args???
   times_i_need_to_replace_letter = array_of_correct_indexes.count
   counter = 0
   times_i_need_to_replace_letter.times do
-    string_of_blank_spaces[array_of_correct_indexes[counter]] = guess
+    p "what is this counter doing???"
+    p ""
+    p "the counter value is: #{counter}"
+    p "array of correct indexxes is: #{array_of_correct_indexes}"
+    string_of_blank_spaces[array_of_correct_indexes[counter]] = guess #rename counter
     counter += 1
   end
 end
@@ -50,8 +47,6 @@ def end_of_game_handler(secret_word, players_board) # i have a method in a metho
     p "the word was: #{secret_word}"
   end
 end
-
-
 
 def new_game_controller
   secret_word = get_a_word
