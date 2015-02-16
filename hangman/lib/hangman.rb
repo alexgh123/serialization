@@ -63,6 +63,25 @@ def new_game
       indexes_of_correct_guess = (0... secret_word.length).find_all {|i| secret_word[i, 1] == guess}
 
       p "correct guess index is:  #{indexes_of_correct_guess}"
+
+      times_i_need_to_replace_letter = indexes_of_correct_guess.count
+
+      counter = 0
+      times_i_need_to_replace_letter.times do
+
+        p "begin replacer loop, counter is; #{counter}"
+        blank_space_show[indexes_of_correct_guess[counter]] = guess
+        p "blanks space show is: #{blank_space_show}"
+
+        counter += 1
+        p "counter is now: #{counter}"
+      end
+
+      #one line that works below:
+      # blank_space_show[indexes_of_correct_guess[1]] = guess
+
+
+
     else
       count -= 1
       p "try again!"
