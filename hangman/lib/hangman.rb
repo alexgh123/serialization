@@ -9,10 +9,8 @@
 def get_a_word #this isn't necessarily right, i think it can return a word that isn't 5 to 12
   dictionary = File.readlines("../words.txt")
   word = dictionary.sample
-  word = word[0..-2] #remove new line character
-  if word.length < 12 && word.length > 5
-    word
-  else
+  word = word[0..-2] #remove newline character, not sure I should have to do this twice
+  until word.length < 12 && word.length > 5
     word = dictionary.sample
     word = word[0..-2]
   end
@@ -82,4 +80,3 @@ end
 
 
 new_game_controller
-
