@@ -26,10 +26,6 @@ def letter_replacer(array_of_correct_indexes, string_of_blank_spaces, guess) #3 
   times_i_need_to_replace_letter = array_of_correct_indexes.count
   counter = 0
   times_i_need_to_replace_letter.times do
-    p "what is this counter doing???"
-    p ""
-    p "the counter value is: #{counter}"
-    p "array of correct indexxes is: #{array_of_correct_indexes}"
     string_of_blank_spaces[array_of_correct_indexes[counter]] = guess #rename counter
     counter += 1
   end
@@ -55,7 +51,7 @@ def new_game_controller
   players_board = hide_word(secret_word)
   p "Welcome to hangman!"
   until number_of_guesses  == 0 || solved?(secret_word, players_board) do
-    p "you have guessed these letters: #{letters_guessed}"
+    p "you have guessed these letters: #{letters_guessed}" #i should remove correct guesses from this view
     p "Here is your work so far: #{players_board}"
     p "you have: #{number_of_guesses} guesses left"
     p ""
