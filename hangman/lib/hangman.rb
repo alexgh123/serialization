@@ -27,18 +27,19 @@ def player_view_word(secret_word)
   view_word
 end
 
-def solve_judge(secret_word, guess_word)
-  false unless secret_word == guess_word
+def solved?(secret_word, blank_space_show)
+  secret_word == blank_space_show
 end
 
-def letter_replacer(indexes_of_correct_guess, blank_space_show, guess)
-  times_i_need_to_replace_letter = indexes_of_correct_guess.count
+def letter_replacer(array_of_correct_indexes, string_of_blank_spaces, guess)
+  times_i_need_to_replace_letter = array_of_correct_indexes.count
   counter = 0
   times_i_need_to_replace_letter.times do
-    blank_space_show[indexes_of_correct_guess[counter]] = guess
+    string_of_blank_spaces[array_of_correct_indexes[counter]] = guess
     counter += 1
   end
 end
+
 
 def new_game
   #run until solved condition is true
@@ -49,7 +50,7 @@ def new_game
   blank_space_show = player_view_word(secret_word)
   p "Welcome to hangman!"
 
-  until count  == 0 do #or until solved
+  until count  == 0 || solved?(secret_word, blank_space_show) do
 
     p "developer only: (the answer is: #{secret_word})"
 
@@ -73,35 +74,9 @@ def new_game
 
       p "correct guess index is:  #{indexes_of_correct_guess}"
 
-
-
-#letter replacer method could go here to....
-
-      #args passed in: indexes_of_correct_guess,
-
-      # def another_replacer(array)
-      #   times_i_need_to_replace_letter = array.count
-      #   counter = 0
-
-      # end
-
-
       letter_replacer(indexes_of_correct_guess, blank_space_show, guess)
 
 
-    #sandwhiching logic that works: all the way to....
-      # times_i_need_to_replace_letter = indexes_of_correct_guess.count
-      # counter = 0
-      # times_i_need_to_replace_letter.times do
-      #   p "begin replacer loop, counter is; #{counter}"
-      #   blank_space_show[indexes_of_correct_guess[counter]] = guess
-      #   p "blanks space show is: #{blank_space_show}"
-      #   counter += 1
-      #   p "counter is now: #{counter}"
-      # end
-    #end sandwhich logic protector
-
-# here! (end potential letter replacer method)
 
 
 
@@ -111,6 +86,11 @@ def new_game
 
     end
   end #ends do loop
+  if solved?(secret_word, blank_space_show)
+    p "congrats!, you won!"
+  else
+    "you suck"
+  end
 end #ends new game method
 
 
