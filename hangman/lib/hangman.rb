@@ -58,9 +58,6 @@ def new_game
     p "Here is your work so far: #{blank_space_show}"
     #so this is confusing, i want a method to
 
-
-
-
     p "you have: #{count} guesses left"
     p "what is your guess?"
     guess = gets.chomp
@@ -76,22 +73,20 @@ def new_game
 
       letter_replacer(indexes_of_correct_guess, blank_space_show, guess)
 
-
-
-
-
     else
       count -= 1
       p "try again!"
-
     end
   end #ends do loop
+
   if solved?(secret_word, blank_space_show)
     p "congrats!, you won!"
   else
-    "you suck"
+    p "you suck! you lost"
   end
-end #ends new game method
+
+
+end #ends new game meth
 
 
 
