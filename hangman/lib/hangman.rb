@@ -19,7 +19,7 @@ def get_a_word # i need to clean this up
   word
 end
 
-def player_view_word(secret_word)
+def player_view_word(secret_word) #what does this do?
   view_word = ""
   secret_word.length.times do
     view_word << "_"
@@ -27,7 +27,7 @@ def player_view_word(secret_word)
   view_word
 end
 
-def solved?(secret_word, blank_space_show)
+def solved?(secret_word, blank_space_show) #rename blank_space_show
   secret_word == blank_space_show
 end
 
@@ -40,30 +40,26 @@ def letter_replacer(array_of_correct_indexes, string_of_blank_spaces, guess)
   end
 end
 
+#fix blank space show variable name
 
-def new_game
-  #run until solved condition is true
-  #run until count = 0 you loose
+def new_game #this is kinda like the controller
   secret_word = get_a_word
-  count = 5
+  number_of_guesses = 5
   letters_guessed = []
   blank_space_show = player_view_word(secret_word)
+  p ""
   p "Welcome to hangman!"
 
-  until count  == 0 || solved?(secret_word, blank_space_show) do
+  until number_of_guesses  == 0 || solved?(secret_word, blank_space_show) do
 
-    p "developer only: (the answer is: #{secret_word})"
 
-    p "you have guessed these letters: #{letters_guessed}"
+    p "you have guessed these letters: #{letters_guessed.each {|letter| p letter}}"
     p "Here is your work so far: #{blank_space_show}"
-    #so this is confusing, i want a method to
-
-    p "you have: #{count} guesses left"
+    p "you have: #{number_of_guesses} guesses left"
+    p ""
     p "what is your guess?"
     guess = gets.chomp
-    p "You guessed: #{guess}"
     letters_guessed << guess
-
     if secret_word.include?(guess)
       p "that letter is included in the word"
 
@@ -74,8 +70,8 @@ def new_game
       letter_replacer(indexes_of_correct_guess, blank_space_show, guess)
 
     else
-      count -= 1
-      p "try again!"
+      number_of_guesses -= 1
+      p "try again!" if number_of_guesses != 0
     end
   end #ends do loop
 
@@ -83,6 +79,7 @@ def new_game
     p "congrats!, you won!"
   else
     p "you suck! you lost"
+    p "the word was: #{secret_word}"
   end
 
 
