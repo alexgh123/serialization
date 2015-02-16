@@ -40,6 +40,15 @@ def letter_replacer(array_of_correct_indexes, string_of_blank_spaces, guess)
   end
 end
 
+def end_of_game_handler(secret_word, blank_space_show) # i have a method in a method here
+  if solved?(secret_word, blank_space_show)
+    p "congrats!, you won!"
+  else
+    p "you suck! you lost"
+    p "the word was: #{secret_word}"
+  end
+end
+
 #fix blank space show variable name
 
 def new_game #this is kinda like the controller
@@ -53,7 +62,7 @@ def new_game #this is kinda like the controller
   until number_of_guesses  == 0 || solved?(secret_word, blank_space_show) do
 
 
-    p "you have guessed these letters: #{letters_guessed.each {|letter| p letter}}"
+    p "you have guessed these letters: #{letters_guessed.each {|letter| letter.gsub!(/[^0-9A-Za-z]/, '')}}"
     p "Here is your work so far: #{blank_space_show}"
     p "you have: #{number_of_guesses} guesses left"
     p ""
@@ -75,13 +84,7 @@ def new_game #this is kinda like the controller
     end
   end #ends do loop
 
-  if solved?(secret_word, blank_space_show)
-    p "congrats!, you won!"
-  else
-    p "you suck! you lost"
-    p "the word was: #{secret_word}"
-  end
-
+  end_of_game_handler(secret_word, blank_space_show)
 
 end #ends new game meth
 
