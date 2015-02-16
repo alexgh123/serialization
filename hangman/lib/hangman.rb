@@ -6,7 +6,7 @@
 
 #there is prob a way to load the list everytime, but i'm not sure its necessary
 
-def get_a_word # i need to clean this up
+def get_a_word #this isn't necessarily right, i think it can return a word that isn't 5 to 12
   dictionary = File.readlines("../words.txt")
   word = dictionary.sample
   word = word[0..-2] #remove new line character
@@ -19,7 +19,7 @@ def get_a_word # i need to clean this up
   word
 end
 
-def hide_word(secret_word) #what does this do?
+def hide_word(secret_word)
   view_word = ""
   secret_word.length.times do
     view_word << "_"
@@ -27,8 +27,8 @@ def hide_word(secret_word) #what does this do?
   view_word
 end
 
-def solved?(secret_word, blank_space_show) #rename blank_space_show
-  secret_word == blank_space_show
+def solved?(secret_word, players_board)
+  secret_word == players_board
 end
 
 def letter_replacer(array_of_correct_indexes, string_of_blank_spaces, guess)
@@ -44,8 +44,8 @@ def index_numbers_of_matching_letters(secret_word, guess)
   (0... secret_word.length).find_all {|i| secret_word[i, 1] == guess}
 end
 
-def end_of_game_handler(secret_word, blank_space_show) # i have a method in a method here
-  if solved?(secret_word, blank_space_show)
+def end_of_game_handler(secret_word, players_board) # i have a method in a method here
+  if solved?(secret_word, players_board)
     p "congrats!, you won!, as you know, the word was : #{secret_word}"
   else
     p "you suck! you lost"
@@ -53,17 +53,17 @@ def end_of_game_handler(secret_word, blank_space_show) # i have a method in a me
   end
 end
 
-#fix blank space show variable name
 
-def new_game_controller #this is kinda like the controller
+
+def new_game_controller
   secret_word = get_a_word
   number_of_guesses = 5
   letters_guessed = []
-  blank_space_show = hide_word(secret_word)
+  players_board = hide_word(secret_word)
   p "Welcome to hangman!"
-  until number_of_guesses  == 0 || solved?(secret_word, blank_space_show) do
+  until number_of_guesses  == 0 || solved?(secret_word, players_board) do
     p "you have guessed these letters: #{letters_guessed}"
-    p "Here is your work so far: #{blank_space_show}"
+    p "Here is your work so far: #{players_board}"
     p "you have: #{number_of_guesses} guesses left"
     p ""
     p "what is your guess?"
@@ -71,18 +71,14 @@ def new_game_controller #this is kinda like the controller
     letters_guessed << guess
     if secret_word.include?(guess)
       indexes_of_correct_guess = index_numbers_of_matching_letters(secret_word, guess)
-      letter_replacer(indexes_of_correct_guess, blank_space_show, guess)
+      letter_replacer(indexes_of_correct_guess, players_board, guess)
     else
       number_of_guesses -= 1
       p "try again!" if number_of_guesses != 0
     end
   end
-  end_of_game_handler(secret_word, blank_space_show)
-end #ends new game meth
-
-
-#i need to rename the blank_space_show variable becuase it makes no sense, what it is is the obscured player view word, its just blank spaces, but the
-#player_progress is a better variable name?
+  end_of_game_handler(secret_word, players_board)
+end
 
 
 new_game_controller
