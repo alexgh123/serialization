@@ -31,6 +31,15 @@ def solve_judge(secret_word, guess_word)
   false unless secret_word == guess_word
 end
 
+def letter_replacer(indexes_of_correct_guess, blank_space_show, guess)
+  times_i_need_to_replace_letter = indexes_of_correct_guess.count
+  counter = 0
+  times_i_need_to_replace_letter.times do
+    blank_space_show[indexes_of_correct_guess[counter]] = guess
+    counter += 1
+  end
+end
+
 def new_game
   #run until solved condition is true
   #run until count = 0 you loose
@@ -68,20 +77,30 @@ def new_game
 
 #letter replacer method could go here to....
 
+      #args passed in: indexes_of_correct_guess,
 
-      times_i_need_to_replace_letter = indexes_of_correct_guess.count
+      # def another_replacer(array)
+      #   times_i_need_to_replace_letter = array.count
+      #   counter = 0
 
-      counter = 0
-      times_i_need_to_replace_letter.times do
-        p "begin replacer loop, counter is; #{counter}"
-        blank_space_show[indexes_of_correct_guess[counter]] = guess
-        p "blanks space show is: #{blank_space_show}"
-
-        counter += 1
-        p "counter is now: #{counter}"
+      # end
 
 
-      end
+      letter_replacer(indexes_of_correct_guess, blank_space_show, guess)
+
+
+    #sandwhiching logic that works: all the way to....
+      # times_i_need_to_replace_letter = indexes_of_correct_guess.count
+      # counter = 0
+      # times_i_need_to_replace_letter.times do
+      #   p "begin replacer loop, counter is; #{counter}"
+      #   blank_space_show[indexes_of_correct_guess[counter]] = guess
+      #   p "blanks space show is: #{blank_space_show}"
+      #   counter += 1
+      #   p "counter is now: #{counter}"
+      # end
+    #end sandwhich logic protector
+
 # here! (end potential letter replacer method)
 
 
